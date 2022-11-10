@@ -5,8 +5,11 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Link from 'src/core/components/ui/Link';
+import { Button } from '@mui/material';
+import { NextPageWithLayout } from './_app';
+import { ReactElement } from 'react';
 
-export default function HomePage() {
+const HomePage: NextPageWithLayout = () => {
   return (
     <Container maxWidth="lg">
       <Head>
@@ -29,6 +32,14 @@ export default function HomePage() {
         <Link href="/about" color="secondary">
           Go to the about page
         </Link>
+        <Button
+          variant="contained"
+          component={Link}
+          noLinkStyle
+          href="/dev/examples"
+        >
+          Examples
+        </Button>
       </Box>
 
       <footer>
@@ -45,4 +56,15 @@ export default function HomePage() {
       </footer>
     </Container>
   );
-}
+};
+
+// optionally
+// HomePage.getLayout = function getLayout(page: ReactElement) {
+//   return (
+//     <MainLayout>
+//       <NestedLayout>{page}</NestedLayout>
+//     </MainLayout>
+//   )
+// }
+
+export default HomePage;

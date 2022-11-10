@@ -4,8 +4,10 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Link from 'src/core/components/ui/Link';
+import { NextPageWithLayout } from './_app';
+import { ReactElement } from 'react';
 
-export default function AboutPage() {
+const AboutPage: NextPageWithLayout = () => {
   return (
     <Container maxWidth="lg">
       <Box
@@ -28,4 +30,16 @@ export default function AboutPage() {
       </Box>
     </Container>
   );
-}
+};
+
+// optionally
+AboutPage.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <div>
+      <Typography variant="h4">Some layout things</Typography>
+      {page}
+    </div>
+  );
+};
+
+export default AboutPage;

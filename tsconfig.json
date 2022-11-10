@@ -17,5 +17,5 @@
     "baseUrl": "."
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "doc", "cypress", "private"]
+  "exclude": ["node_modules", "doc", "private"]
 }
