@@ -5,10 +5,10 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import theme from 'src/theme/theme';
-import createEmotionCache from 'src/core/utils/createEmotionCache';
+import createEmotionCache from 'src/utils/createEmotionCache';
 import { ReactElement, ReactNode } from 'react';
 import { NextPage } from 'next';
-import MainLayout from 'src/core/components/layouts/MainLayout';
+import SiteLayout from 'src/layouts/site/SiteLayout';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -17,6 +17,7 @@ interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
 
+// allow per-page layouts
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
@@ -25,11 +26,13 @@ type AppPropsWithLayout = MyAppProps & {
   Component: NextPageWithLayout;
 };
 
+//
 export default function MyApp(props: AppPropsWithLayout) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
+  // allow per-page layouts or default one
   const getLayout =
-    Component.getLayout ?? ((page) => <MainLayout> {page}</MainLayout>);
+    Component.getLayout ?? ((page) => <SiteLayout> {page}</SiteLayout>);
 
   return (
     <CacheProvider value={emotionCache}>

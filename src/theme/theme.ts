@@ -2,6 +2,8 @@ import { Roboto } from '@next/font/google';
 import { createTheme } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 
+// Roboto is not a variable font so need to specify weights
+// https://nextjs.org/docs/basic-features/font-optimization#google-fonts
 export const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
   subsets: ['latin'],

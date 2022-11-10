@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Link from 'src/core/components/ui/Link';
+import Link from 'src/components/ui/Link';
 import { Button } from '@mui/material';
 import { NextPageWithLayout } from './_app';
 import { ReactElement } from 'react';
