@@ -5,7 +5,7 @@ export type NavigationItem = {
   role?: string;
   isOpen?: boolean;
   isHome?: boolean;
-  children?: {
+  subItems?: {
     subheader: string;
     items: NavigationItem[];
   };

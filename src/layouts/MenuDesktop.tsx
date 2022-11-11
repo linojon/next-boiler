@@ -22,7 +22,7 @@ const MenuDesktop: React.FC<{
   };
 
   return (
-    <Stack direction={'row'} alignItems={'center'}>
+    <Stack direction={'row'} alignItems={'center'} spacing={4}>
       {navConfig.map((item, index) => {
         // todo if item.role ...
         return (
@@ -45,6 +45,7 @@ const MenuDesktop: React.FC<{
 export default MenuDesktop;
 
 //---------------------------------------
+// TODO handle submenus dropdowns
 
 function MenuDesktopItem({
   item,
@@ -93,25 +94,26 @@ function MenuDesktopItem({
 // ---------------------------------------
 
 const LinkStyled = styled(Link)(({ theme }) => ({
-  // ...theme.typography.subtitle2,
-  // color: theme.palette.text.primary,
-  // transition: theme.transitions.create('opacity', {
-  //   duration: theme.transitions.duration.shortest
-  // }),
-  // '&:hover': {
-  //   opacity: 0.48,
-  //   textDecoration: 'none'
-  // }
+  ...theme.typography.subtitle2,
+  color: theme.palette.text.primary,
+  transition: theme.transitions.create('opacity', {
+    duration: theme.transitions.duration.shortest,
+  }),
+  '&:hover': {
+    opacity: 0.48,
+    textDecoration: 'none',
+  },
+
   // copy from go-usa.us site
 
-  color: theme.palette.primary.main, // '#062d52', // theme.palette.text.primary,
-  marginRight: theme.spacing(2),
-  fontSize: '13px',
-  fontWeight: 700,
-  textTransform: 'uppercase',
-  textDecoration: 'none',
-  whiteSpace: 'nowrap',
-  '&:hover': {
-    color: theme.palette.secondary.main, // '#c02126'
-  },
+  // color: theme.palette.primary.main, // '#062d52', // theme.palette.text.primary,
+  // marginRight: theme.spacing(2),
+  // fontSize: '13px',
+  // fontWeight: 700,
+  // textTransform: 'uppercase',
+  // textDecoration: 'none',
+  // whiteSpace: 'nowrap',
+  // '&:hover': {
+  //   color: theme.palette.secondary.main, // '#c02126'
+  // },
 }));
