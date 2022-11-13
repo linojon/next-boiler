@@ -1,4 +1,14 @@
-import { Box, Drawer, IconButton, List, ListItem, styled } from '@mui/material';
+import {
+  Box,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  styled,
+} from '@mui/material';
 import { useState } from 'react';
 import NextLink from 'next/link';
 import Scrollbar from 'src/components/ui/Scrollbar';
@@ -7,12 +17,15 @@ import Image from 'next/image';
 import configuration from 'src/configuration';
 import LinkButton from 'src/components/ui/LinkButton';
 import { NavigationItem } from 'src/@types/NavigationItem';
+import { useRouter } from 'next/router';
 
 const MenuMobile: React.FC<{
   isHome: boolean;
   navConfig: NavigationItem[];
 }> = ({ isHome, navConfig }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const { pathname } = useRouter();
 
   const handleDrawerOpen = () => {
     setDrawerOpen(true);
@@ -24,7 +37,7 @@ const MenuMobile: React.FC<{
 
   return (
     <>
-      <IconButton onClick={handleDrawerOpen}>
+      <IconButton sx={{ color: 'common.white' }} onClick={handleDrawerOpen}>
         <MobileMenuIcon />
       </IconButton>
 
@@ -47,9 +60,16 @@ const MenuMobile: React.FC<{
           </Box>
 
           <List disablePadding>
-            {navConfig.map((item) => {
+            {navConfig.map((item, index) => {
               // todo if item.role ...
-              return <MenuMobileItem />;
+              return (
+                <MenuMobileItem
+                  key={index}
+                  item={item}
+                  pathname={pathname}
+                  isHome={isHome}
+                />
+              );
             })}
           </List>
         </Scrollbar>
@@ -61,38 +81,41 @@ const MenuMobile: React.FC<{
 export default MenuMobile;
 
 //----------------------------------------
-
-function MenuMobileItem({
-  item,
-  isOpen,
-  isActive,
-  onOpen,
-}: {
-  item: NavigationItem;
-  isOpen: boolean;
-  isActive: boolean;
-  onOpen: VoidFunction;
-}) {
-  const { title, path, icon, subItems } = item;
-
-  // if subItems , see MenuMobile from Opportunity project
-
-  if (title === '[separator]') {
-    return (
-      <ListItemStyle
-        sx={{ color: 'text.primary', borderBottom: '1px solid grey' }}
-      >
-        {' '}
-      </ListItemStyle>
-    );
-  }
-}
-
-// ----------------------------------------------------------------------
+// TODO handle submenus accordians
 
 const ICON_SIZE = 22;
 const ITEM_SIZE = 48;
 const PADDING = 2.5;
+
+function MenuMobileItem({
+  item,
+  pathname,
+  isHome,
+}: {
+  item: NavigationItem;
+  pathname: string;
+  isHome: boolean;
+}) {
+  const { title, path, icon, subItems } = item;
+  const isActive = pathname === path;
+
+  if (title === '[divider]') {
+    return <Divider />;
+  }
+
+  // if (title === '[login]')
+
+  return (
+    <NextLink href={path || '#'} legacyBehavior>
+      <ListItem disablePadding>
+        <ListItemIcon>{item.icon}</ListItemIcon>
+        <ListItemText primary={item.title} />
+      </ListItem>
+    </NextLink>
+  );
+}
+
+// ----------------------------------------------------------------------
 
 const ListItemStyle = styled(ListItem)(({ theme }) => ({
   ...theme.typography.body2,

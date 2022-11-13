@@ -13,7 +13,7 @@ const LinkButton: React.FCC<{
 
   if (variant === 'MenuItem') {
     return (
-      <Link passHref href={href}>
+      <Link passHref href={href} legacyBehavior>
         <a style={{ textDecoration: 'none', color: 'inherit' }} target={target}>
           {!!tooltip ? (
             <Tooltip title={tooltip}>
@@ -27,7 +27,7 @@ const LinkButton: React.FCC<{
     );
   } else if (variant === 'IconButton') {
     return (
-      <Link passHref href={href}>
+      <Link passHref href={href} legacyBehavior>
         <a style={{ textDecoration: 'none', color: 'inherit' }}>
           {!!tooltip ? (
             <Tooltip title={tooltip}>
@@ -41,7 +41,7 @@ const LinkButton: React.FCC<{
     );
   } else {
     return (
-      <Link passHref href={href}>
+      <Link passHref href={href} legacyBehavior>
         <a style={{ textDecoration: 'none', color: 'inherit' }} target={target}>
           {!!tooltip ? (
             <Tooltip title={tooltip}>

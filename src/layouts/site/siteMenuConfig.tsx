@@ -1,4 +1,4 @@
-// special titles: [separator], [login]
+// special titles: [divider], [login]
 
 import { NavigationItem } from 'src/@types/NavigationItem';
 
