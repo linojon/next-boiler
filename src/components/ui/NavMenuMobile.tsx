@@ -12,14 +12,15 @@ import {
 import { useState } from 'react';
 import NextLink from 'next/link';
 import Scrollbar from 'src/components/ui/Scrollbar';
-import { MobileMenuIcon } from 'src/theme/icon';
+// import { MobileMenuIcon } from 'src/theme/icon';
 import Image from 'next/image';
 import configuration from 'src/configuration';
 import LinkButton from 'src/components/ui/LinkButton';
 import { NavigationItem } from 'src/@types/NavigationItem';
 import { useRouter } from 'next/router';
+import Hamburger from 'hamburger-react';
 
-const MenuMobile: React.FC<{
+const NavMenuMobile: React.FC<{
   isHome: boolean;
   navConfig: NavigationItem[];
 }> = ({ isHome, navConfig }) => {
@@ -37,9 +38,10 @@ const MenuMobile: React.FC<{
 
   return (
     <>
-      <IconButton sx={{ color: 'common.white' }} onClick={handleDrawerOpen}>
+      {/* <IconButton sx={{ color: 'common.white' }} onClick={handleDrawerOpen}>
         <MobileMenuIcon />
-      </IconButton>
+      </IconButton> */}
+      <Hamburger toggled={drawerOpen} toggle={setDrawerOpen} />
 
       <Drawer
         open={drawerOpen}
@@ -78,7 +80,7 @@ const MenuMobile: React.FC<{
   );
 };
 
-export default MenuMobile;
+export default NavMenuMobile;
 
 //----------------------------------------
 // TODO handle submenus accordians
@@ -106,21 +108,21 @@ function MenuMobileItem({
   // if (title === '[login]')
 
   return (
-    <NextLink href={path || '#'} legacyBehavior>
-      <ListItem disablePadding>
+    <NextLink href={path || '#'} legacyBehavior passHref>
+      <ListItemStyled disablePadding>
         <ListItemIcon>{item.icon}</ListItemIcon>
-        <ListItemText primary={item.title} />
-      </ListItem>
+        <ListItemText disableTypography primary={item.title} />
+      </ListItemStyled>
     </NextLink>
   );
 }
 
 // ----------------------------------------------------------------------
 
-const ListItemStyle = styled(ListItem)(({ theme }) => ({
+const ListItemStyled = styled(ListItem)(({ theme }) => ({
   ...theme.typography.body2,
   height: ITEM_SIZE,
-  textTransform: 'capitalize',
+  textTransform: 'capitalize', // 'uppercase',
   paddingLeft: theme.spacing(PADDING),
   paddingRight: theme.spacing(2.5),
   color: theme.palette.text.secondary,

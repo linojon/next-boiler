@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import theme from 'src/theme/theme';
 
-const MenuDesktop: React.FC<{
+const NavMenuDesktop: React.FC<{
   isHome: boolean;
   navConfig: NavigationItem[];
 }> = ({ isHome, navConfig }) => {
@@ -30,7 +30,7 @@ const MenuDesktop: React.FC<{
   );
 };
 
-export default MenuDesktop;
+export default NavMenuDesktop;
 
 //---------------------------------------
 // TODO handle submenus dropdowns
@@ -68,7 +68,7 @@ function MenuDesktopItem({
         color={color}
         underline="hover"
         sx={{
-          textTransform: 'uppercase',
+          textTransform: 'capitalize', // 'uppercase',
         }}
       >
         {/* {icon} */}

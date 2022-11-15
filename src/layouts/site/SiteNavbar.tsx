@@ -1,7 +1,7 @@
 import { AppBar, Box, Container, Hidden, Toolbar } from '@mui/material';
 import { useRouter } from 'next/router';
-import MenuDesktop from '../MenuDesktop';
-import MenuMobile from '../MenuMobile';
+import NavMenuMobile from 'src/components/ui/NavMenuMobile';
+import NavMenuDesktop from '../../components/ui/NavMenuDesktop';
 
 import { siteMenuConfig } from './siteMenuConfig';
 
@@ -28,11 +28,11 @@ const SiteNavbar: React.FC = () => {
       >
         {/* // todo logo, hamburger button etc, mobile vs desktop */}
         <Hidden mdDown>
-          <MenuDesktop isHome={isHome} navConfig={siteMenuConfig} />
+          <NavMenuDesktop isHome={isHome} navConfig={siteMenuConfig} />
         </Hidden>
 
         <Hidden mdUp>
-          <MenuMobile isHome={isHome} navConfig={siteMenuConfig} />
+          <NavMenuMobile isHome={isHome} navConfig={siteMenuConfig} />
         </Hidden>
       </Toolbar>
     </AppBar>
