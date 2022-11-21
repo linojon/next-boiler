@@ -5,7 +5,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import theme from 'src/theme/theme';
-import createEmotionCache from 'src/utils/createEmotionCache';
+import createEmotionCache from 'src/lib/createEmotionCache';
 import { ReactElement, ReactNode } from 'react';
 import { NextPage } from 'next';
 import SiteLayout from 'src/layouts/site/SiteLayout';

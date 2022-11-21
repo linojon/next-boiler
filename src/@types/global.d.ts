@@ -19,6 +19,9 @@ declare global {
   type EmptyCallback = () => void;
 
   type HttpMethod = `GET` | `POST` | `PUT` | 'PATCH' | 'DELETE' | 'HEAD';
+
+  //
+  var prisma: PrismaClient;
 }
 
 declare module 'react' {

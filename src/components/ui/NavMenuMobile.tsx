@@ -14,7 +14,7 @@ import NextLink from 'next/link';
 import Scrollbar from 'src/components/ui/Scrollbar';
 // import { MobileMenuIcon } from 'src/theme/icon';
 import Image from 'next/image';
-import configuration from 'src/configuration';
+import configuration from 'src/lib/configuration';
 import LinkButton from 'src/components/ui/LinkButton';
 import { NavigationItem } from 'src/@types/NavigationItem';
 import { useRouter } from 'next/router';
