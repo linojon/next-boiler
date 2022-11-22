@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
+import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider, EmotionCache } from '@emotion/react';
@@ -27,8 +28,13 @@ type AppPropsWithLayout = MyAppProps & {
 };
 
 //
-export default function MyApp(props: AppPropsWithLayout) {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+const App = ({
+  Component,
+  emotionCache = clientSideEmotionCache,
+  pageProps,
+}: AppPropsWithLayout) => {
+  // export default function MyApp(props: AppPropsWithLayout) {
+  //   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   // allow per-page layouts or default one
   const getLayout =
@@ -36,14 +42,18 @@ export default function MyApp(props: AppPropsWithLayout) {
 
   return (
     <CacheProvider value={emotionCache}>
-      <Head>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-      </Head>
-      <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
-        {getLayout(<Component {...pageProps} />)}
-      </ThemeProvider>
+      <SessionProvider session={pageProps.session}>
+        <Head>
+          <meta name="viewport" content="initial-scale=1, width=device-width" />
+        </Head>
+        <ThemeProvider theme={theme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          {getLayout(<Component {...pageProps} />)}
+        </ThemeProvider>
+      </SessionProvider>
     </CacheProvider>
   );
-}
+};
+
+export default App;

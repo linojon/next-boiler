@@ -5,6 +5,7 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import theme from 'src/theme/theme';
+import AccountPopover from './AccountPopover';
 
 const NavMenuDesktop: React.FC<{
   isHome: boolean;
@@ -26,6 +27,7 @@ const NavMenuDesktop: React.FC<{
           />
         );
       })}
+      <AccountPopover />
     </Stack>
   );
 };

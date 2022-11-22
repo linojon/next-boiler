@@ -4,6 +4,16 @@ import { NavigationItem } from 'src/@types/NavigationItem';
 
 export const siteMenuConfig: NavigationItem[] = [
   {
+    title: 'Home',
+    path: '/',
+    // icon:
+  },
+  {
+    title: 'Posts',
+    path: '/posts',
+    // icon:
+  },
+  {
     title: 'About',
     path: '/about',
     // icon:
