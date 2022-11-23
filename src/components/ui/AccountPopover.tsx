@@ -39,6 +39,9 @@ const AccountPopover: React.FC = () => {
         <NextLink href="/posts/new">
           <button>New Post</button>
         </NextLink>
+        <NextLink href="/posts/drafts">
+          <button>Drafts</button>
+        </NextLink>
         <button onClick={() => signOut()}>Log out</button>
       </div>
     );
