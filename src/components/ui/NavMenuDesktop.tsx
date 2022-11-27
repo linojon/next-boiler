@@ -17,7 +17,7 @@ const NavMenuDesktop: React.FC<{
   return (
     <Stack direction={'row'} alignItems={'center'} spacing={4}>
       {navConfig.map((item, index) => {
-        if (!item.role || userIsAuthorized(user, item.role))
+        if (!item.role || userIsAuthorized(user, item.role)) {
           return (
             <MenuDesktopItem
               key={index}
@@ -26,6 +26,7 @@ const NavMenuDesktop: React.FC<{
               isHome={isHome}
             />
           );
+        }
       })}
       <AccountPopover />
     </Stack>

@@ -8,6 +8,10 @@ const currentUser = ({ data: session }, mockRole = null): User => {
   return session?.userData;
 };
 
+const isAuthenticating = ({ data: session }): boolean => {
+  return session?.status === 'loading';
+};
+
 const userIsAuthorized = (user: User, role: string): User => {
   return userHasRoles(user, roleAccess[role]);
 };
@@ -36,6 +40,7 @@ const currentAuthorizedUser = (session, role, mockRole = null): User => {
 
 export {
   currentUser,
+  isAuthenticating,
   userIsAuthorized,
   //
   userHasRoles,
