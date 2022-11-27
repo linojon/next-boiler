@@ -8,9 +8,12 @@ import {
   MenuItem,
   Typography,
 } from '@mui/material';
+import { User } from '@prisma/client';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import NextLink from 'next/link';
 import { useRef, useState } from 'react';
+import { UserSession } from 'src/@types/UserSession';
+import { currentUser } from 'src/authorization/auth-utils';
 import { ProfileIcon, SettingsIcon } from 'src/theme/icon';
 import MenuPopover from './MenuPopover';
 
@@ -21,7 +24,9 @@ const MENU_OPTIONS: { label: string; icon: any; linkTo: string }[] = [
 ];
 
 const AccountPopover: React.FC = () => {
-  const { data: session, status } = useSession();
+  const user = currentUser(useSession());
+  console.log({ user });
+  console.log(user?.image);
 
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
@@ -56,7 +61,7 @@ const AccountPopover: React.FC = () => {
   //     </NextLink>
   //   );
   // }
-  if (!session) {
+  if (!user) {
     return <button onClick={() => signIn()}>Sign In</button>;
   }
 
@@ -82,7 +87,7 @@ const AccountPopover: React.FC = () => {
       <>
         <Box mr={2}>
           <Typography variant="subtitle2" color="text.primary"></Typography>
-          {session.user.name}
+          {user.name}
         </Box>
         <IconButton
           ref={anchorRef}
@@ -104,7 +109,7 @@ const AccountPopover: React.FC = () => {
             }),
           }}
         >
-          <Avatar alt={session.user.name} src={session.user.image} />
+          <Avatar alt={user.name} src={user.image} />
         </IconButton>
 
         <MenuPopover
@@ -116,14 +121,13 @@ const AccountPopover: React.FC = () => {
           <>
             <Box my={1.5} px={2.5}>
               <Typography variant="subtitle1" noWrap>
-                {session.user.name}
+                {user.name}
               </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: 'text.secondary' }}
-                noWrap
-              >
-                {session.user.email}
+              <Typography variant="body2" color="text.secondary" noWrap>
+                {user.email}
+              </Typography>
+              <Typography variant="body2" color="text.secondary" noWrap>
+                {user.role.toLowerCase()}
               </Typography>
             </Box>
 

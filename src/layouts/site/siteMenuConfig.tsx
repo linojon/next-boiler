@@ -22,4 +22,14 @@ export const siteMenuConfig: NavigationItem[] = [
     title: 'Contact',
     path: 'mailto:info@parkerhill.com',
   },
+  {
+    title: 'Drafts',
+    path: '/posts/drafts',
+    role: 'member',
+  },
+  {
+    title: 'New Post',
+    path: '/posts/new',
+    role: 'member',
+  },
 ];

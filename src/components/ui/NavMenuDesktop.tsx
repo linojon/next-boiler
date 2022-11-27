@@ -1,31 +1,31 @@
-import { Box, Link, Stack, styled } from '@mui/material';
-import path from 'node:path/win32';
+import { Box, Link, Stack } from '@mui/material';
 import { NavigationItem } from 'src/@types/NavigationItem';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import theme from 'src/theme/theme';
 import AccountPopover from './AccountPopover';
+import { currentUser, userIsAuthorized } from 'src/authorization/auth-utils';
+import { useSession } from 'next-auth/react';
 
 const NavMenuDesktop: React.FC<{
   isHome: boolean;
   navConfig: NavigationItem[];
 }> = ({ isHome, navConfig }) => {
   const { pathname } = useRouter();
-  // let { data: session, status } = useSession()
+  const user = currentUser(useSession());
 
   return (
     <Stack direction={'row'} alignItems={'center'} spacing={4}>
       {navConfig.map((item, index) => {
-        // todo if item.role ...
-        return (
-          <MenuDesktopItem
-            key={index}
-            item={item}
-            pathname={pathname}
-            isHome={isHome}
-          />
-        );
+        if (!item.role || userIsAuthorized(user, item.role))
+          return (
+            <MenuDesktopItem
+              key={index}
+              item={item}
+              pathname={pathname}
+              isHome={isHome}
+            />
+          );
       })}
       <AccountPopover />
     </Stack>
